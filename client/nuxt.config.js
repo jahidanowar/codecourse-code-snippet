@@ -1,7 +1,5 @@
 let env = require("dotenv").config();
 
-console.log(env.parsed);
-
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -36,7 +34,30 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+
+  axios: {
+    baseURL: env.parsed.API_URL
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "auth/login",
+            method: "post",
+            propertyName: "data.token"
+          },
+          user: {
+            url: "auth/me",
+            method: "get",
+            propertyName: "data"
+          }
+        }
+      }
+    }
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
