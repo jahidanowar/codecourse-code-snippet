@@ -64,12 +64,13 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                :to="{ name: 'index' }"
+              <a
+                href="#"
+                @click.prevent="signOut"
                 class="text-lg text-gray-700 lg:py-8 lg:px-4"
               >
                 {{ $auth.user.name }}
-              </nuxt-link>
+              </a>
             </li>
             <li>
               <nuxt-link
@@ -109,6 +110,11 @@ export default {
     return {
       mobileNavOpen: false
     };
+  },
+  methods: {
+    async signOut() {
+      await this.$auth.logout();
+    }
   }
 };
 </script>

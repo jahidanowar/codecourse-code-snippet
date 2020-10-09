@@ -14,7 +14,9 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (!$token = auth()->attempt($request->only('email', 'password'))) {
+        $token = auth()->attempt($request->only('email', 'password'));
+
+        if (!$token) {
             return response()->json([
                 'errors' => [
                     'email' => [

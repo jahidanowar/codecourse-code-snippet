@@ -53,6 +53,10 @@ export default {
             url: "auth/me",
             method: "get",
             propertyName: "data"
+          },
+          logout: {
+            url: "auth/logout",
+            method: "post"
           }
         }
       }
