@@ -7,10 +7,26 @@
 
       <a
         href="#"
-        class="lg:hidden ml-auto"
+        class="lg:hidden ml-auto flex flex-col relative justify-center w-8 h-8"
         @click.prevent="mobileNavOpen = !mobileNavOpen"
-        >Open</a
       >
+        <span
+          class="bg-blue-500 h-1 w-8 rounded mb-1"
+          :class="{
+            'transition-all duration-200 transform rotate-45 absolute right-0': mobileNavOpen
+          }"
+        ></span>
+        <span
+          class="bg-blue-500 h-1 w-8 rounded mb-1"
+          :class="{
+            'transition-all duration-200 transform -rotate-45 absolute right-0': mobileNavOpen
+          }"
+        ></span>
+        <span
+          class="bg-blue-500 h-1 w-8 rounded mb-1"
+          :class="{ hidden: mobileNavOpen }"
+        ></span>
+      </a>
 
       <div
         class="w-full flex"
@@ -19,7 +35,7 @@
         <ul class="lg:h-24 lg:flex items-center w-full lg:w-auto">
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Browse
@@ -27,7 +43,7 @@
           </li>
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Search
@@ -40,7 +56,7 @@
         >
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Dashboard
@@ -48,7 +64,7 @@
           </li>
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Kenneth Fernandez
@@ -56,7 +72,7 @@
           </li>
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Sign in
@@ -64,7 +80,7 @@
           </li>
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Create an account
@@ -72,7 +88,7 @@
           </li>
           <li>
             <nuxt-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'index' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Sign out
