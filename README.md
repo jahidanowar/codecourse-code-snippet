@@ -20,3 +20,5 @@ Let's build a code snippets website with Nuxt, Laravel and Tailwind. This projec
 ## Get Started
 
 Please check `api` and `client` folder to setup local environment
+
+You can check Codecourse website to learn how to code this fullstack application [Code Snippet](https://codecourse.com/courses/build-a-code-snippet-website-with-me)
