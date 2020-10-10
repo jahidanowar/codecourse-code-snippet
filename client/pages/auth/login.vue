@@ -40,7 +40,7 @@
           >
           <input
             v-model="form.password"
-            type="text"
+            type="password"
             name="password"
             id="password"
             class="border-2 border-gray-400 rounded w-full p-3"
