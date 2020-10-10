@@ -74,6 +74,11 @@
 </template>
 <script>
 export default {
+  head() {
+    return {
+      title: "Login",
+    };
+  },
   data() {
     return {
       form: {
