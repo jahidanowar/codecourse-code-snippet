@@ -1,4 +1,6 @@
-# client
+# About
+
+Nuxt application with Tailwind CSS
 
 ## Build Setup
 
@@ -16,5 +18,9 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
+
+## Get started
+
+Create .env file in root folder and add `API_URL`
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
