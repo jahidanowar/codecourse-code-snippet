@@ -26,6 +26,11 @@ class SnippetController extends Controller
 
     public function store(Request $request)
     {
-        $request->user()->snippets()->create();
+        $snippet = $request->user()->snippets()->create();
+
+        return fractal()
+            ->item($snippet)
+            ->transformWith(new SnippetTransformer())
+            ->toArray();
     }
 }

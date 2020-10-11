@@ -13,13 +13,13 @@
         <span
           class="bg-blue-500 h-1 w-8 rounded mb-1"
           :class="{
-            'transition-all duration-200 transform rotate-45 absolute right-0': mobileNavOpen
+            'transition-all duration-200 transform rotate-45 absolute right-0': mobileNavOpen,
           }"
         ></span>
         <span
           class="bg-blue-500 h-1 w-8 rounded mb-1"
           :class="{
-            'transition-all duration-200 transform -rotate-45 absolute right-0': mobileNavOpen
+            'transition-all duration-200 transform -rotate-45 absolute right-0': mobileNavOpen,
           }"
         ></span>
         <span
@@ -57,7 +57,7 @@
           <template v-if="$auth.loggedIn">
             <li>
               <nuxt-link
-                :to="{ name: 'index' }"
+                :to="{ name: 'dashboard' }"
                 class="text-lg text-gray-700 lg:py-8 lg:px-4"
               >
                 Dashboard
@@ -108,13 +108,13 @@
 export default {
   data() {
     return {
-      mobileNavOpen: false
+      mobileNavOpen: false,
     };
   },
   methods: {
     async signOut() {
       await this.$auth.logout();
-    }
-  }
+    },
+  },
 };
 </script>
