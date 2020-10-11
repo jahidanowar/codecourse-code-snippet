@@ -22,7 +22,7 @@ class CreateStepsTable extends Migration
             $table->text('body')->nullable();
             $table->timestamps();
 
-            $table->foreign('snippet_id')->references('id')->on('snippets')->onDelete('cascade');
+            // $table->foreign('snippet_id')->references('id')->on('snippets')->onDelete('cascade');
         });
     }
 

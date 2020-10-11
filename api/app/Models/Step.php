@@ -10,6 +10,6 @@ class Step extends Model
     use HasFactory;
 
     public function snippet() {
-        $this->belongsTo(Snippet::class)
+        $this->belongsTo(Snippet::class);
     }
 }
