@@ -15,12 +15,11 @@ class CreateSnippetsTable extends Migration
     {
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned()->index();
             $table->uuid('uuid');
             $table->string('title')->nullable();
             $table->timestamps();
 
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->index()->constrained('users')->onDelete('cascade');
         });
     }
 

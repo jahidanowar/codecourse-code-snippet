@@ -15,14 +15,13 @@ class CreateStepsTable extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
-            $table->integer('snippet_id')->unsigned()->index();
             $table->uuid('uuid');
             $table->string('title')->nullable();
             $table->integer('order')->unsigned()->index();
             $table->text('body')->nullable();
             $table->timestamps();
 
-            // $table->foreign('snippet_id')->references('id')->on('snippets')->onDelete('cascade');
+            $table->foreignId('snippet_id')->index()->constrained('snippets')->onDelete('cascade')->index();
         });
     }
 
