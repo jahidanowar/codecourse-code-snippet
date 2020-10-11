@@ -3,7 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], function () {
-    Route::post('/login', 'LoginController');
-    Route::get('/me', 'MeController');
-    Route::post('/logout', 'LogOutController');
+    Route::post('login', 'LoginController');
+    Route::get('me', 'MeController');
+    Route::post('logout', 'LogOutController');
 });
+
+Route::group(['prefix' => 'snippets', 'namespace' => 'App\Http\Controllers\Snippets'], function () {
+    Route::post('', 'SnippetController@store');
+});
+
