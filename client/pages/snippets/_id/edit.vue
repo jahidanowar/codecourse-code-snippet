@@ -195,6 +195,18 @@ export default {
         });
       }, 500),
     },
+    currentStep: {
+      deep: true,
+      handler: _debounce(async function (step) {
+        await this.$axios.$patch(
+          `snippets/${this.snippet.uuid}/steps/${step.uuid}`,
+          {
+            title: step.title,
+            body: step.body,
+          }
+        );
+      }, 500),
+    },
   },
   computed: {
     orderedStepsAsc() {

@@ -43,10 +43,5 @@ class SnippetController extends Controller
         ]);
 
         $snippet->update($request->only('title'));
-
-        return fractal()
-            ->item($snippet)
-            ->transformWith(new SnippetTransformer())
-            ->toArray();
     }
 }
