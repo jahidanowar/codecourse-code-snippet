@@ -23,7 +23,9 @@
 
     <div class="container">
       <div class="flex items-center mb-6">
-        <div class="text-xl text-gray-600 font-medium mr-3">1/5.</div>
+        <div class="text-xl text-gray-600 font-medium mr-3">
+          {{ currentStepIndex + 1 }}/{{ steps.length }}.
+        </div>
         <input
           v-model="currentStep.title"
           type="text"
@@ -224,6 +226,11 @@ export default {
         this.orderedStepsAsc.find((s) => s.uuid === this.$route.query.step) ||
         this.firstStep
       );
+    },
+    currentStepIndex() {
+      return this.orderedStepsAsc
+        .map((s) => s.uuid)
+        .indexOf(this.currentStep.uuid);
     },
   },
   async asyncData({ app, params }) {

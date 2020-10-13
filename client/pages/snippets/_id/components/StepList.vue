@@ -8,7 +8,7 @@
           },
         }"
         :class="{ 'font-bold': currentStep.uuid === step.uuid }"
-        >{{ step.order }}. {{ step.title || "Untitled step" }}</nuxt-link
+        >{{ index + 1 }}. {{ step.title || "Untitled step" }}</nuxt-link
       >
     </li>
   </ul>
