@@ -35,11 +35,7 @@
           class="w-full lg:w-2/3 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8"
         >
           <div class="flex flex-row lg:flex-col mr-2 order-first">
-            <nuxt-link
-              :to="{}"
-              class="block mb-2 p-3 bg-blue-500 rounded-lg mr-2 lg:mr-0"
-              title="Previous step"
-            >
+            <StepNavigationButton :step="previousStep" title="Previous Step">
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,11 +44,10 @@
                 height="24"
               >
                 <path
-                  class="heroicon-ui"
                   d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z"
                 />
               </svg>
-            </nuxt-link>
+            </StepNavigationButton>
 
             <nuxt-link
               :to="{}"
@@ -87,11 +82,7 @@
           <div
             class="flex flex-row-reverse lg:flex-col order-first lg:order-last"
           >
-            <nuxt-link
-              :to="{}"
-              class="block mb-2 p-3 bg-blue-500 rounded-lg mr-2 lg:mr-0"
-              title="Next step"
-            >
+            <StepNavigationButton :step="nextStep" title="Next Step">
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +94,7 @@
                   d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
                 />
               </svg>
-            </nuxt-link>
+            </StepNavigationButton>
             <nuxt-link
               :to="{}"
               class="block mb-2 p-3 bg-blue-500 rounded-lg"
@@ -163,13 +154,14 @@
 
 <script>
 import StepList from "../components/StepList";
-
+import StepNavigationButton from "../components/StepNavigationButton";
 import { orderBy as _orderBy } from "lodash";
 import { debounce as _debounce } from "lodash";
 
 export default {
   components: {
     StepList,
+    StepNavigationButton,
   },
   data() {
     return {
@@ -207,8 +199,23 @@ export default {
     orderedStepsAsc() {
       return _orderBy(this.steps, "order", "asc");
     },
+    orderedStepsDesc() {
+      return _orderBy(this.steps, "order", "desc");
+    },
     firstStep() {
       return this.orderedStepsAsc[0];
+    },
+    nextStep() {
+      return (
+        this.orderedStepsAsc.find((s) => s.order > this.currentStep.order) ||
+        null
+      );
+    },
+    previousStep() {
+      return (
+        this.orderedStepsDesc.find((s) => s.order < this.currentStep.order) ||
+        null
+      );
     },
     currentStep() {
       return (
