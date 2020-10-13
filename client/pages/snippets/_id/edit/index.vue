@@ -100,7 +100,6 @@
                 height="24"
               >
                 <path
-                  class="heroicon-ui"
                   d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
                 />
               </svg>
@@ -118,7 +117,6 @@
                 height="24"
               >
                 <path
-                  class="heroicon-ui"
                   d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"
                 />
               </svg>
@@ -136,7 +134,6 @@
                 height="24"
               >
                 <path
-                  class="heroicon-ui"
                   d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"
                 />
               </svg>
@@ -155,7 +152,8 @@
                 <nuxt-link
                   :to="{}"
                   :class="{ 'font-bold': currentStep.uuid === step.uuid }"
-                  >{{ step.order }}. {{ step.title }}</nuxt-link
+                  >{{ step.order }}.
+                  {{ step.title || "Untitled step" }}</nuxt-link
                 >
               </li>
             </ul>
@@ -185,6 +183,11 @@ export default {
     return {
       snippet: null,
       steps: [],
+    };
+  },
+  head() {
+    return {
+      title: `Editing ${this.snippet.title || "Untitled snippet"}`,
     };
   },
   watch: {
