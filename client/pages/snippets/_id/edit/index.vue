@@ -143,20 +143,7 @@
         <div class="w-full lg:w-1/3">
           <div class="mb-8">
             <h1 class="text-xl text-gray-600 font-medium mb-6">Steps</h1>
-            <ul>
-              <li
-                class="mb-1"
-                v-for="(step, index) in orderedStepsAsc"
-                :key="index"
-              >
-                <nuxt-link
-                  :to="{}"
-                  :class="{ 'font-bold': currentStep.uuid === step.uuid }"
-                  >{{ step.order }}.
-                  {{ step.title || "Untitled step" }}</nuxt-link
-                >
-              </li>
-            </ul>
+            <StepList :steps="orderedStepsAsc" :currentStep="currentStep" />
           </div>
 
           <div class="text-gray-500 text-sm">
@@ -175,10 +162,15 @@
 </template>
 
 <script>
+import StepList from "../components/StepList";
+
 import { orderBy as _orderBy } from "lodash";
 import { debounce as _debounce } from "lodash";
 
 export default {
+  components: {
+    StepList,
+  },
   data() {
     return {
       snippet: null,
