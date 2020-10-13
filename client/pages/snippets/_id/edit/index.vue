@@ -159,10 +159,11 @@
 <script>
 import StepList from "../components/StepList";
 import StepNavigationButton from "../components/StepNavigationButton";
-import { orderBy as _orderBy } from "lodash";
+import browseSnippet from "@/mixins/snippets/browseSnippet";
 import { debounce as _debounce } from "lodash";
 
 export default {
+  mixins: [browseSnippet],
   components: {
     StepList,
     StepNavigationButton,
@@ -197,40 +198,6 @@ export default {
           }
         );
       }, 500),
-    },
-  },
-  computed: {
-    orderedStepsAsc() {
-      return _orderBy(this.steps, "order", "asc");
-    },
-    orderedStepsDesc() {
-      return _orderBy(this.steps, "order", "desc");
-    },
-    firstStep() {
-      return this.orderedStepsAsc[0];
-    },
-    nextStep() {
-      return (
-        this.orderedStepsAsc.find((s) => s.order > this.currentStep.order) ||
-        null
-      );
-    },
-    previousStep() {
-      return (
-        this.orderedStepsDesc.find((s) => s.order < this.currentStep.order) ||
-        null
-      );
-    },
-    currentStep() {
-      return (
-        this.orderedStepsAsc.find((s) => s.uuid === this.$route.query.step) ||
-        this.firstStep
-      );
-    },
-    currentStepIndex() {
-      return this.orderedStepsAsc
-        .map((s) => s.uuid)
-        .indexOf(this.currentStep.uuid);
     },
   },
   async asyncData({ app, params }) {
