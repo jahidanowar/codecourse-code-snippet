@@ -23,7 +23,7 @@
 export default {
   props: {
     step: {
-      required: true,
+      required: false,
       type: Object,
     },
     title: {

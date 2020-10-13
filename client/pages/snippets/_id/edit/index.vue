@@ -13,7 +13,9 @@
 
           <div class="text-gray-600">
             Created by
-            <nuxt-link :to="{ name: 'index' }">Kenneth Fernandez</nuxt-link>
+            <nuxt-link :to="{ name: 'index' }">{{
+              snippet.author.data.name
+            }}</nuxt-link>
           </div>
         </div>
       </div>
@@ -163,15 +165,15 @@ export default {
     StepList,
     StepNavigationButton,
   },
+  head() {
+    return {
+      title: `Editing ${this.snippet.title || "Untitled snippet"}`,
+    };
+  },
   data() {
     return {
       snippet: null,
       steps: [],
-    };
-  },
-  head() {
-    return {
-      title: `Editing ${this.snippet.title || "Untitled snippet"}`,
     };
   },
   watch: {
