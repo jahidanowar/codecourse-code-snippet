@@ -111,7 +111,6 @@
   </div>
 </template>
 
-
 <script>
 import StepList from "./components/StepList";
 import StepNavigationButton from "./components/StepNavigationButton";
