@@ -24,14 +24,9 @@ class StepController extends Controller
     public function store(Snippet $snippet, Request $request)
     {
         // authorize!
-        $this->validate($request, [
-            'title' => 'nullable',
-            'body' => 'nullable'
-        ]);
-
         $step = $snippet->steps()->create(
             array_merge($request->only('title', 'body'), [
-                'order' => 1
+                'order' => $this->getOrder($request)
             ])
         );
 
@@ -39,5 +34,13 @@ class StepController extends Controller
             ->item($step)
             ->transformWith(new StepTransformer())
             ->toArray();
+    }
+
+    protected function getOrder(Request $request)
+    {
+        return Step::where('uuid', $request->before)
+            ->orWhere('uuid', $request->after)
+            ->first()
+            ->{($request->before ? 'before' : 'after') . 'Order'}();
     }
 }
