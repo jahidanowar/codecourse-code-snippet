@@ -81,24 +81,8 @@
                 />
               </svg>
             </StepNavigationButton>
-            <AddStepButton @added="handleStepAdded" position="after" :snippet="snippet" :currentStep="currentStep" />
-            <nuxt-link
-              :to="{}"
-              class="block mb-2 p-3 bg-blue-500 rounded-lg mr-2 lg:mr-0"
-              title="Delete step"
-            >
-              <svg
-                class="fill-current text-white h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-              >
-                <path
-                  d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"
-                />
-              </svg>
-            </nuxt-link>
+            <AddStepButton position="after" :snippet="snippet" :currentStep="currentStep" @added="handleStepAdded"  />
+            <DeleteStepButton v-if="steps.length > 1" :snippet="snippet" :currentStep="currentStep" @added="handleStepDeleted" />
           </div>
         </div>
         <div class="w-full lg:w-1/3">
@@ -126,6 +110,7 @@
 import StepList from "../components/StepList";
 import StepNavigationButton from "../components/StepNavigationButton";
 import AddStepButton from "./components/AddStepButton";
+import DeleteStepButton from "./components/DeleteStepButton";
 
 import browseSnippet from "@/mixins/snippets/browseSnippet";
 import { debounce as _debounce } from "lodash";
@@ -136,6 +121,7 @@ export default {
     StepList,
     StepNavigationButton,
     AddStepButton,
+    DeleteStepButton
   },
   head() {
     return {
@@ -180,7 +166,16 @@ export default {
     handleStepAdded(step) {
       this.steps.push(step);
       this.goToStep(step);
-    }
+    },
+    handleStepDeleted(step) {
+      const previousStep = this.previousStep
+
+      this.steps = this.steps.filter((s) => {
+        return s.uuid !== step.uuid
+      })
+
+      this.goToStep(previousStep || this.firstStep)
+    },
   },
   async asyncData({ app, params }) {
     let snippet = await app.$axios.$get(`snippets/${params.id}`);
