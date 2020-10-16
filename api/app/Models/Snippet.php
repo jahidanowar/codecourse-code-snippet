@@ -32,6 +32,11 @@ class Snippet extends Model
         });
     }
 
+    public function isPublic()
+    {
+        return $this->is_public;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
