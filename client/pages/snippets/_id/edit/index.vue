@@ -82,7 +82,7 @@
               </svg>
             </StepNavigationButton>
             <AddStepButton position="after" :snippet="snippet" :currentStep="currentStep" @added="handleStepAdded"  />
-            <DeleteStepButton v-if="steps.length > 1" :snippet="snippet" :currentStep="currentStep" @added="handleStepDeleted" />
+            <DeleteStepButton v-if="steps.length > 1" :snippet="snippet" :currentStep="currentStep" @deleted="handleStepDeleted" />
           </div>
         </div>
         <div class="w-full lg:w-1/3">

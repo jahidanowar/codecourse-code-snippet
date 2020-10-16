@@ -40,7 +40,7 @@ export default {
             [this.position]: this.currentStep.uuid
         })
 
-        this.$emit('added', response.data)
+        this.$emit('added', response.data.data)
     }
   }
 };
