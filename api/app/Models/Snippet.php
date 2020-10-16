@@ -10,7 +10,7 @@ class Snippet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['uuid', 'title'];
+    protected $fillable = ['uuid', 'title', 'is_public'];
 
     public function getRouteKeyName()
     {
