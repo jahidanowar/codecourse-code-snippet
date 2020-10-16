@@ -21,6 +21,12 @@ class StepController extends Controller
         $step->update($request->only('title', 'body'));
     }
 
+    public function destrop(Snippet $snippet, Step $step)
+    {
+        // authorize!
+        $step->delete();
+    }
+
     public function store(Snippet $snippet, Request $request)
     {
         // authorize!
