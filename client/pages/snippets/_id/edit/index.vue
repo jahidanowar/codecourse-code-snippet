@@ -93,13 +93,25 @@
 
           <div class="border-t-2 border-gray-300 pt-6 pb-2">
             <h3 class="text-xl text-gray-600 font-medium mb-2">Publishing</h3>
-            <div class="text-gray-500 text-sm mb-2">
+            <div class="text-gray-500 text-sm mb-6">
               <template v-if="lastSaved">
                 Last saved at {{ lastSavedFormatted }}
               </template>
               <template v-else>
                 No changes saved in this session yet.
               </template>
+            </div>
+
+            <div class="flex items-baseline mb-6">
+              <input v-model="snippet.is_public" type="checkbox" name="public" id="public" class="mr-2">
+              <div>
+                <label for="public" class="text-gray-600 font-medium">
+                  Make this snippet public
+                </label>
+                <p class="text-gray-500 text-sm">
+                  Don't worry you can change this later
+                </p>
+              </div>
             </div>
           </div>
 
@@ -157,6 +169,15 @@ export default {
       handler: _debounce(async function (title) {
         await this.$axios.$patch(`snippets/${this.snippet.uuid}`, {
           title,
+        });
+
+        this.touchLastSaved()
+      }, 500),
+    },
+    "snippet.is_public": {
+      handler: _debounce(async function (isPublic) {
+        await this.$axios.$patch(`snippets/${this.snippet.uuid}`, {
+          is_public: isPublic,
         });
 
         this.touchLastSaved()
