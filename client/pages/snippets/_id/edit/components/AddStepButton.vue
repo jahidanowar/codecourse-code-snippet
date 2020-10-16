@@ -35,11 +35,13 @@ export default {
     },
   },
   methods: {
-      async addStep() {
-          const response = await this.$axios.post(`snippets/${this.snippet.uuid}/steps`)
+    async addStep() {
+        const response = await this.$axios.post(`snippets/${this.snippet.uuid}/steps`, {
+            [this.position]: this.currentStep.uuid
+        })
 
-          this.$emit('added', response.data)
-      }
+        this.$emit('added', response.data)
+    }
   }
 };
 </script>

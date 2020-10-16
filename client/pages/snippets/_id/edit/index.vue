@@ -81,7 +81,7 @@
                 />
               </svg>
             </StepNavigationButton>
-            <AddStepButton position="after" :snippet="snippet" :currentStep="currentStep" />
+            <AddStepButton @added="handleStepAdded" position="after" :snippet="snippet" :currentStep="currentStep" />
             <nuxt-link
               :to="{}"
               class="block mb-2 p-3 bg-blue-500 rounded-lg mr-2 lg:mr-0"
