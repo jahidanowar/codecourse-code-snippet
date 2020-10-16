@@ -64,6 +64,7 @@
               </svg>
             </StepNavigationButton>
             <nuxt-link
+              v-if="snippet.user.data.owner"
               :to="{
                 name: 'snippets-id-edit',
                 params: {
