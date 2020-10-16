@@ -87,8 +87,20 @@
         </div>
         <div class="w-full lg:w-1/3">
           <div class="mb-8">
-            <h1 class="text-xl text-gray-600 font-medium mb-6">Steps</h1>
+            <h3 class="text-xl text-gray-600 font-medium mb-6">Steps</h3>
             <StepList :steps="orderedStepsAsc" :currentStep="currentStep" />
+          </div>
+
+          <div class="border-t-2 border-gray-300 pt-6 pb-2">
+            <h3 class="text-xl text-gray-600 font-medium mb-2">Publishing</h3>
+            <div class="text-gray-500 text-sm mb-2">
+              <template v-if="lastSaved">
+                Last saved at {{ lastSavedFormatted }}
+              </template>
+              <template v-else>
+                No changes saved in this session yet.
+              </template>
+            </div>
           </div>
 
           <div class="text-gray-500 text-sm">
@@ -107,13 +119,18 @@
 </template>
 
 <script>
+// Mixins
+import browseSnippet from "@/mixins/snippets/browseSnippet";
+
+// Plugins
+import { debounce as _debounce } from "lodash";
+import moment from 'moment';
+
+// Components
 import StepList from "../components/StepList";
 import StepNavigationButton from "../components/StepNavigationButton";
 import AddStepButton from "./components/AddStepButton";
 import DeleteStepButton from "./components/DeleteStepButton";
-
-import browseSnippet from "@/mixins/snippets/browseSnippet";
-import { debounce as _debounce } from "lodash";
 
 export default {
   mixins: [browseSnippet],
@@ -132,6 +149,7 @@ export default {
     return {
       snippet: null,
       steps: [],
+      lastSaved: null,
     };
   },
   watch: {
@@ -140,6 +158,8 @@ export default {
         await this.$axios.$patch(`snippets/${this.snippet.uuid}`, {
           title,
         });
+
+        this.touchLastSaved()
       }, 500),
     },
     currentStep: {
@@ -152,10 +172,20 @@ export default {
             body: step.body,
           }
         );
+
+        this.touchLastSaved()
       }, 500),
     },
   },
+  computed: {
+    lastSavedFormatted() {
+      return moment(this.lastSaved).format('hh:mm:ss')
+    }
+  },
   methods: {
+    touchLastSaved() {
+      this.lastSaved = moment.now() 
+    },
     goToStep(step){
       this.$router.push({
         query: {
