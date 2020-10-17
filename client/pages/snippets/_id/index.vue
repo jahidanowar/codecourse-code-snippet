@@ -43,7 +43,7 @@
 
           <div class="w-full lg:mr-2">
             <div class="bg-white p-8 rounded-lg text-gray-600">
-              {{ currentStep.body }}
+              <StepMarkdown :value="currentStep.body" />
             </div>
           </div>
 
@@ -113,13 +113,15 @@
 </template>
 
 <script>
+import browseSnippet from "@/mixins/snippets/browseSnippet";
+import StepMarkdown from "@/components/snippets/StepMarkdown";
 import StepList from "./components/StepList";
 import StepNavigationButton from "./components/StepNavigationButton";
-import browseSnippet from "@/mixins/snippets/browseSnippet";
 
 export default {
   mixins: [browseSnippet],
   components: {
+    StepMarkdown,
     StepList,
     StepNavigationButton,
   },

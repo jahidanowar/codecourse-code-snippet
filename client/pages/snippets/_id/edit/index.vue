@@ -61,7 +61,7 @@
               class="w-full mb-6 border-dashed border-2 border-gray-400 rounded-lg"
             ></textarea>
             <div class="bg-white p-8 rounded-lg text-gray-600">
-              Markdown content
+              <StepMarkdown :value="currentStep.body" />
             </div>
           </div>
 
@@ -139,6 +139,7 @@ import { debounce as _debounce } from "lodash";
 import moment from 'moment';
 
 // Components
+import StepMarkdown from "@/components/snippets/StepMarkdown";
 import StepList from "../components/StepList";
 import StepNavigationButton from "../components/StepNavigationButton";
 import AddStepButton from "./components/AddStepButton";
@@ -147,6 +148,7 @@ import DeleteStepButton from "./components/DeleteStepButton";
 export default {
   mixins: [browseSnippet],
   components: {
+    StepMarkdown,
     StepList,
     StepNavigationButton,
     AddStepButton,
@@ -205,7 +207,7 @@ export default {
   },
   methods: {
     touchLastSaved() {
-      this.lastSaved = moment.now() 
+      this.lastSaved = moment.now()
     },
     handleStepAdded(step) {
       this.steps.push(step);
