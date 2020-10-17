@@ -1,6 +1,6 @@
 /*
 
-Arduino® Light Theme - Stefania Mellai <s.mellai@arduino.cc>
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
@@ -8,63 +8,82 @@ Arduino® Light Theme - Stefania Mellai <s.mellai@arduino.cc>
   @apply block bg-gray-200 p-4 rounded text-gray-600 mb-6;
 }
 
-.hljs,
-.hljs-subst {
-  color: #434f54;
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
 }
 
 .hljs-keyword,
-.hljs-attribute,
 .hljs-selector-tag,
-.hljs-doctag,
-.hljs-name {
-  color: #00979d;
-}
-
-.hljs-built_in,
-.hljs-literal,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
-  color: #d35400;
-}
-
-.hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-selector-pseudo {
-  color: #00979d;
-}
-
-.hljs-type,
-.hljs-string,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
-  color: #005c5f;
-}
-
-.hljs-title,
-.hljs-section {
-  color: #880000;
+.hljs-subst {
+  color: #333;
   font-weight: bold;
 }
 
-.hljs-comment {
-  color: rgba(149, 165, 166, 0.8);
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
 }
 
-.hljs-meta-keyword {
-  color: #728e00;
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
 }
 
 .hljs-meta {
-  color: #434f54;
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
 }
 
 .hljs-emphasis {
@@ -73,12 +92,4 @@ Arduino® Light Theme - Stefania Mellai <s.mellai@arduino.cc>
 
 .hljs-strong {
   font-weight: bold;
-}
-
-.hljs-function {
-  color: #728e00;
-}
-
-.hljs-number {
-  color: #8a7b52;
 }
