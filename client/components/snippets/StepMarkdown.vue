@@ -3,7 +3,17 @@
 </template>
 
 <script>
-const markdown = require('markdown-it')();
+import hljs from "highlight.js"
+const markdown = require('markdown-it')({
+  highlight(str, lang) {
+    let esc = markdown.utils.escapeHtml
+    if(lang && hljs.getLanguage(lang)){
+       return `<pre class="hljs language-${esc(lang.toLowerCase())}"><code>${hljs.highlightAuto(esc(str)).value}</code></pre>`
+    }
+
+    return `<pre class="hljs"><code>${esc(str)}</code></pre>`
+  }
+});
 
 export default {
   props: {

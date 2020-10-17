@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "vendor/hljs";
 
 body {
   @apply bg-gray-200 font-sans;
@@ -21,4 +22,12 @@ a {
 
 p {
   @apply text-gray-600 leading-relaxed;
+}
+
+pre {
+  @apply break-all whitespace-pre-wrap;
+}
+
+code {
+  @apply bg-gray-200 p-1 rounded;
 }
