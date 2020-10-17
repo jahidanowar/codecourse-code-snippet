@@ -207,13 +207,6 @@ export default {
     touchLastSaved() {
       this.lastSaved = moment.now() 
     },
-    goToStep(step){
-      this.$router.push({
-        query: {
-          step: step.uuid,
-        }
-      })
-    },
     handleStepAdded(step) {
       this.steps.push(step);
       this.goToStep(step);
