@@ -9,6 +9,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], f
 });
 
 Route::group(['prefix' => 'snippets', 'namespace' => 'App\Http\Controllers\Snippets'], function () {
+    Route::get('', 'SnippetController@index');
     Route::post('', 'SnippetController@store');
     Route::get('{snippet}', 'SnippetController@show');
     Route::patch('{snippet}', 'SnippetController@update');

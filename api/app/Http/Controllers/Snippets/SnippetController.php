@@ -15,6 +15,16 @@ class SnippetController extends Controller
             ->only('store', 'update');
     }
 
+    public function index(Request $request){
+        return fractal()
+            ->collection(
+                Snippet::take($request->get('limit', 10))->latest()->public()->get()
+            )
+            ->parseIncludes(['author'])
+            ->transformWith(new SnippetTransformer())
+            ->toArray();
+     }
+
     public function show(Snippet $snippet)
     {
         $this->authorize('show', $snippet);
