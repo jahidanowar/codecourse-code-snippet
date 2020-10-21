@@ -1,8 +1,15 @@
 <template>
   <div class="bg-white py-8 lg:py-0 flex items-center">
     <div class="container flex flex-wrap lg:flex-no-wrap items-center">
-      <nuxt-link :to="{ name: 'home' }" class="mr-10 flex-shrink-0">
-        <img src="~/assets/logo.svg" alt="Logo" class="h-8" />
+      <nuxt-link
+        :to="{ name: 'home' }"
+        class="mr-10 flex-shrink-0"
+      >
+        <img
+          src="~/assets/logo.svg"
+          alt="Logo"
+          class="h-8"
+        />
       </nuxt-link>
 
       <a
@@ -35,7 +42,7 @@
         <ul class="lg:h-24 lg:flex items-center w-full lg:w-auto">
           <li>
             <nuxt-link
-              :to="{ name: 'index' }"
+              :to="{ name: 'browse' }"
               class="text-lg text-gray-700 lg:py-8 lg:px-4"
             >
               Browse
@@ -51,9 +58,7 @@
           </li>
         </ul>
 
-        <ul
-          class="lg:h-24 lg:flex items-center w-full lg:w-auto text-right ml-auto"
-        >
+        <ul class="lg:h-24 lg:flex items-center w-full lg:w-auto text-right ml-auto">
           <template v-if="$auth.loggedIn">
             <li>
               <nuxt-link
@@ -73,7 +78,7 @@
               </a>
             </li>
             <li>
-             <a
+              <a
                 href="#"
                 @click.prevent="signOut"
                 class="text-lg text-gray-700 lg:py-8 lg:px-4"
@@ -107,13 +112,13 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       mobileNavOpen: false,
     };
   },
   methods: {
-    async signOut() {
+    async signOut () {
       console.log('signout')
       await this.$auth.logout();
     },
