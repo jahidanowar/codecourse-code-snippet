@@ -7,7 +7,7 @@
           params: {
             id: snippet.uuid
           }
-        }">{{ snippet.title }}</nuxt-link>
+        }">{{ snippet.title || 'Untitle snippet' }}</nuxt-link>
       </h1>
       <div class="text-gray-500 mr-6 font-medium">
         {{ snippet.steps_count }} steps

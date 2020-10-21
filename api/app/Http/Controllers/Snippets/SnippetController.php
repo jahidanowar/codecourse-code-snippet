@@ -23,7 +23,7 @@ class SnippetController extends Controller
             ->parseIncludes(['author'])
             ->transformWith(new SnippetTransformer())
             ->toArray();
-     }
+    }
 
     public function show(Snippet $snippet)
     {

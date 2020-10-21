@@ -17,3 +17,8 @@ Route::group(['prefix' => 'snippets', 'namespace' => 'App\Http\Controllers\Snipp
     Route::delete('{snippet}/steps/{step}', 'StepController@destroy');
     Route::post('{snippet}/steps', 'StepController@store');
 });
+
+
+Route::group(['prefix' => 'me', 'namespace' => 'App\Http\Controllers\Me'], function () {
+    Route::get('/snippets', 'SnippetController@index');
+});
