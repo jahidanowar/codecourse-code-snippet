@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Me;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Snippet;
 use App\Transformers\Snippets\SnippetTransformer;
 
 class SnippetController extends Controller
