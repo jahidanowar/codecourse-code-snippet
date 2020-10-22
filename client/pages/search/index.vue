@@ -16,12 +16,12 @@
         <ais-stats class="mb-6" />
         <ais-refinement-list attribute="brand" />
         <ais-hits class="mb-10">
-          <template slot="data" slot-scope="{ data }">
+          <template slot="item" slot-scope="{ item }">
             <p>
-              <ais-highlight attribute="title" :hit="data" />
+              <ais-highlight attribute="data.title" :hit="item" />
             </p>
             <p>
-              <ais-highlight attribute="author" :hit="data" />
+              <ais-highlight attribute="data.author" :hit="item" />
             </p>
           </template>
         </ais-hits>
@@ -58,11 +58,6 @@ export default {
     AisSearchBox,
     AisStats,
     AisPagination,
-  },
-  data() {
-    return {
-      snippets: [],
-    };
   },
   head() {
     return {
