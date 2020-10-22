@@ -50,6 +50,15 @@ const searchClient = algoliasearch(
 );
 
 export default {
+  components: {
+    AisInstantSearchSsr,
+    AisRefinementList,
+    AisHits,
+    AisHighlight,
+    AisSearchBox,
+    AisStats,
+    AisPagination,
+  },
   data() {
     return {
       snippets: [],
@@ -65,11 +74,6 @@ export default {
             "https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/algolia-min.css",
         },
       ],
-    };
-  },
-  data() {
-    return {
-      instantSearchState: null,
     };
   },
   mixins: [
@@ -88,15 +92,6 @@ export default {
       this.$nuxt.context.nuxtState.algoliaState || window.__NUXT__.algoliaState;
 
     this.instantsearch.hydrate(results);
-  },
-  components: {
-    AisInstantSearchSsr,
-    AisRefinementList,
-    AisHits,
-    AisHighlight,
-    AisSearchBox,
-    AisStats,
-    AisPagination,
   },
 };
 </script>
