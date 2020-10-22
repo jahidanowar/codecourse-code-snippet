@@ -20,5 +20,9 @@ Route::group(['prefix' => 'snippets', 'namespace' => 'App\Http\Controllers\Snipp
 });
 
 Route::group(['prefix' => 'me', 'namespace' => 'App\Http\Controllers\Me'], function () {
-    Route::get('/snippets', 'SnippetController@index');
+    Route::get('snippets', 'SnippetController@index');
+});
+
+Route::group(['prefix' => 'keys', 'namespace' => 'App\Http\Controllers\Keys'], function () {
+    Route::get('algolia', 'AlgoliaKeyController');
 });
