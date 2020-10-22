@@ -25,6 +25,11 @@ class SnippetPolicy
         return $user->id === $snippet->user_id;
     }
 
+    public function delete(User $user, Snippet $snippet)
+    {
+        return $user->id === $snippet->user_id;
+    }
+
     public function storeStep(User $user, Snippet $snippet)
     {
         return $user->id === $snippet->user_id;
