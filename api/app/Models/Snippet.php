@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
+use App\Transformers\Snippets\SnippetTransformer;
 
 class Snippet extends Model
 {
@@ -17,6 +18,15 @@ class Snippet extends Model
     public function getRouteKeyName()
     {
         return 'uuid';
+    }
+
+    public function toSearchableArray()
+    {
+        return fractal()
+        ->item($this)
+        ->transformWith(new SnippetTransformer())
+        ->parseIncludes(['author', 'steps'])
+        ->toArray();
     }
 
     public static function boot()
