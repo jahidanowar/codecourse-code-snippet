@@ -47,6 +47,11 @@ export default {
       console.log(this.snippets, snippet.uuid);
     },
   },
+  head() {
+    return {
+      title: "Dashboard",
+    };
+  },
   async asyncData({ app }) {
     let snippets = await app.$axios.$get("me/snippets");
 

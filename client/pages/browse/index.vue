@@ -9,7 +9,9 @@
     </div>
 
     <div class="container">
-      <h1 class="text-xl text-gray-600 font-medium mb-6">All Snippets ({{ snippets.length }})</h1>
+      <h1 class="text-xl text-gray-600 font-medium mb-6">
+        All Snippets ({{ snippets.length }})
+      </h1>
       <SnippetCard
         v-for="snippet in snippets"
         :key="snippet.uuid"
@@ -22,23 +24,28 @@
 </template>
 
 <script>
-import SnippetCard from "@/components/snippets/SnippetCard"
+import SnippetCard from "@/components/snippets/SnippetCard";
 
 export default {
   components: {
-    SnippetCard
+    SnippetCard,
   },
-  data () {
+  data() {
     return {
-      snippets: []
-    }
+      snippets: [],
+    };
   },
-  async asyncData ({ app }) {
-    let snippets = await app.$axios.$get('snippets')
+  head() {
+    return {
+      title: "Browse",
+    };
+  },
+  async asyncData({ app }) {
+    let snippets = await app.$axios.$get("snippets");
 
     return {
-      snippets: snippets.data
-    }
-  }
-}
+      snippets: snippets.data,
+    };
+  },
+};
 </script>
