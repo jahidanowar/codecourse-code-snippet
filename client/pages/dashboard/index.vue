@@ -1,42 +1,40 @@
 <template>
   <div class="container mt-16">
     <div class="flex justify-between">
-      <h1 class="text-xl text-gray-600 font-medium mb-6">Your Snippets ({{ snippets.length }})</h1>
+      <h1 class="text-xl text-gray-600 font-medium mb-6">
+        Your Snippets ({{ snippets.length }})
+      </h1>
 
-      <a
-        href="#"
-        @click.prevent="createSnippet"
-      >+ Create snippet</a>
+      <a href="#" @click.prevent="createSnippet">+ Create snippet</a>
     </div>
 
-    <div
-      v-if="snippets.length === 0"
-      class="text-gray-500 font-medium"
-    >There are no snippets here. You know what to do.</div>
+    <div v-if="snippets.length === 0" class="text-gray-500 font-medium">
+      There are no snippets here. You know what to do.
+    </div>
 
-    <SnippetCard
+    <DashboardSnippetCard
       v-for="snippet in snippets"
       :key="snippet.uuid"
       :snippet="snippet"
-    >
-    </SnippetCard>
+      @deleted="removeSnippet"
+    />
   </div>
 </template>
 
 <script>
-import SnippetCard from "@/components/snippets/SnippetCard"
+import DashboardSnippetCard from "./components/DashboardSnippetCard";
 
 export default {
   components: {
-    SnippetCard
+    DashboardSnippetCard,
   },
-  data () {
+  data() {
     return {
-      snippets: []
-    }
+      snippets: [],
+    };
   },
   methods: {
-    async createSnippet () {
+    async createSnippet() {
       let snippet = await this.$axios.$post("snippets");
 
       this.$router.push({
@@ -44,13 +42,17 @@ export default {
         params: { id: snippet.data.uuid },
       });
     },
+    removeSnippet(snippet) {
+      this.snippets = this.snippets.filter((s) => s.uuid !== snippet.uuid);
+      console.log(this.snippets, snippet.uuid);
+    },
   },
-  async asyncData ({ app }) {
-    let snippets = await app.$axios.$get('me/snippets')
+  async asyncData({ app }) {
+    let snippets = await app.$axios.$get("me/snippets");
 
     return {
-      snippets: snippets.data
-    }
-  }
+      snippets: snippets.data,
+    };
+  },
 };
 </script>
