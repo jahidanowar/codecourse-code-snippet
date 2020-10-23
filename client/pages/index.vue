@@ -16,7 +16,7 @@
             :to="{
               name: 'snippets-id',
               params: {
-                id: ''
+                id: snippets[0].uuid
               }
             }"
             class="inline-block text-lg py-3 px-5 bg-blue-500 text-white rounded-lg"

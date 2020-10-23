@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white py-8 lg:py-0 flex items-center">
     <div class="container flex flex-wrap lg:flex-no-wrap items-center">
-      <nuxt-link :to="{ name: 'home' }" class="mr-10 flex-shrink-0">
+      <nuxt-link :to="{ name: 'index' }" class="mr-10 flex-shrink-0">
         <img src="~/assets/logo.svg" alt="Logo" class="h-8" />
       </nuxt-link>
 
