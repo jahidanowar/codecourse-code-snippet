@@ -1,6 +1,14 @@
 <template>
   <SnippetCard :snippet="snippet">
-    <nuxt-link :to="{}">{{ snippet.author.data.name }}</nuxt-link>
+    <nuxt-link
+      :to="{
+        name: 'author-id',
+        params: {
+          id: snippet.author.data.username,
+        },
+      }"
+      >{{ snippet.author.data.name }}</nuxt-link
+    >
   </SnippetCard>
 </template>
 <script>

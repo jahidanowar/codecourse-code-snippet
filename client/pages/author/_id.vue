@@ -3,29 +3,21 @@
     <div class="bg-white mb-16">
       <div class="container py-10 pb-16">
         <h1 class="text-4xl text-gray-700 font-medium leading-tight mb-4">
-          Browse
+          {{ user.name }}
         </h1>
+        <div class="text-gray-600">Members since {{ joined }}</div>
       </div>
     </div>
 
     <div class="container">
       <h1 class="text-xl text-gray-600 font-medium mb-6">
-        All Snippets ({{ snippets.length }})
+        Public Snippets ({{ snippets.length }})
       </h1>
       <SnippetCard
         v-for="snippet in snippets"
         :key="snippet.uuid"
         :snippet="snippet"
       >
-        <nuxt-link
-          :to="{
-            name: 'author-id',
-            params: {
-              id: snippet.author.data.username,
-            },
-          }"
-          >{{ snippet.author.data.name }}</nuxt-link
-        >
       </SnippetCard>
     </div>
   </div>
@@ -33,6 +25,7 @@
 
 <script>
 import SnippetCard from "@/components/snippets/SnippetCard";
+import moment from "moment";
 
 export default {
   components: {
@@ -40,18 +33,28 @@ export default {
   },
   data() {
     return {
+      user: [],
       snippets: [],
     };
   },
+  computed: {
+    joined() {
+      return moment(this.user.joined, "YYYY-MM-DD HH:mm:ss").format(
+        "Do MMMM YYYY"
+      );
+    },
+  },
   head() {
     return {
-      title: "Browse",
+      title: `${this.user.name} Profile`,
     };
   },
-  async asyncData({ app }) {
-    let snippets = await app.$axios.$get("snippets");
+  async asyncData({ app, params }) {
+    let user = await app.$axios.$get(`users/${params.id}`);
+    let snippets = await app.$axios.$get(`users/${params.id}/snippets`);
 
     return {
+      user: user.data,
       snippets: snippets.data,
     };
   },
