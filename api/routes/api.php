@@ -25,6 +25,7 @@ Route::group(['prefix' => 'me', 'namespace' => 'App\Http\Controllers\Me'], funct
 
 Route::group(['prefix' => 'users/{user}', 'namespace' => 'App\Http\Controllers\Users'], function () {
     Route::get('', 'UserController@show');
+    Route::patch('', 'UserController@update');
     Route::get('snippets', 'SnippetController@index');
 });
 

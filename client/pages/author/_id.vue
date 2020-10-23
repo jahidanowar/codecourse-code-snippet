@@ -46,7 +46,7 @@ export default {
   },
   head() {
     return {
-      title: `${this.user.name} Profile`,
+      title: `Snippets by ${this.user.name}`,
     };
   },
   async asyncData({ app, params }) {

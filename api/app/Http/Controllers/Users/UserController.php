@@ -15,4 +15,17 @@ class UserController extends Controller
             ->transformWith(new PublicUserTransformer())
             ->toArray();
     }
+
+    public function update(User $user, Request $request) {
+        $this->authorize('as', $user);
+
+        $this->validate($request, [
+            'email' => 'required|email|unique:users,email,'.$request->user()->id,
+            'username' => 'required|alpha_dash|unique:users,username,'.$request->user()->id,
+            'name' => 'required',
+            'password' => 'nullable|min:6'
+        ]);
+
+        $user->update($request->only('email', 'name', 'username', 'password'));
+    }
 }
