@@ -9,7 +9,12 @@
 
           <div class="text-gray-600">
             Created by
-            <nuxt-link :to="{ name: 'index' }">{{
+            <nuxt-link :to="{
+              name: 'author-id',
+              params: {
+                id: snippet.author.data.username,
+              },
+            }">{{
               snippet.author.data.name
             }}</nuxt-link>
           </div>
@@ -22,11 +27,12 @@
       </h1>
 
       <div class="flex flex-wrap lg:flex-no-wrap">
-        <div
-          class="w-full lg:w-2/3 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8"
-        >
+        <div class="w-full lg:w-2/3 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8">
           <div class="flex flex-row lg:flex-col mr-2 order-first">
-            <StepNavigationButton :step="previousStep" title="Previous Step">
+            <StepNavigationButton
+              :step="previousStep"
+              title="Previous Step"
+            >
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,9 +40,7 @@
                 width="24"
                 height="24"
               >
-                <path
-                  d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z"
-                />
+                <path d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z" />
               </svg>
             </StepNavigationButton>
           </div>
@@ -47,10 +51,11 @@
             </div>
           </div>
 
-          <div
-            class="flex flex-row-reverse lg:flex-col order-first lg:order-last"
-          >
-            <StepNavigationButton :step="nextStep" title="Next Step">
+          <div class="flex flex-row-reverse lg:flex-col order-first lg:order-last">
+            <StepNavigationButton
+              :step="nextStep"
+              title="Next Step"
+            >
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +63,7 @@
                 width="24"
                 height="24"
               >
-                <path
-                  d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
-                />
+                <path d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z" />
               </svg>
             </StepNavigationButton>
             <nuxt-link
@@ -84,9 +87,7 @@
                 width="24"
                 height="24"
               >
-                <path
-                  d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"
-                />
+                <path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
               </svg>
             </nuxt-link>
           </div>
@@ -94,7 +95,10 @@
         <div class="w-full lg:w-1/3">
           <div class="mb-8">
             <h1 class="text-xl text-gray-600 font-medium mb-6">Steps</h1>
-            <StepList :steps="orderedStepsAsc" :currentStep="currentStep" />
+            <StepList
+              :steps="orderedStepsAsc"
+              :currentStep="currentStep"
+            />
           </div>
 
           <div class="text-gray-500 text-sm">
@@ -125,18 +129,18 @@ export default {
     StepList,
     StepNavigationButton,
   },
-  head() {
+  head () {
     return {
       title: `${this.snippet.title || "Untitled snippet"}`,
     };
   },
-  data() {
+  data () {
     return {
       snippet: null,
       steps: [],
     };
   },
-  async asyncData({ app, params }) {
+  async asyncData ({ app, params }) {
     let snippet = await app.$axios.$get(`snippets/${params.id}`);
 
     return {

@@ -130,6 +130,12 @@
           </button>
         </div>
       </form>
+
+      <div class="text-center text-gray-600">
+        Already have an account?
+
+        <nuxt-link :to="{ name: 'auth-login' }">Login here</nuxt-link>
+      </div>
     </div>
   </div>
 </template>

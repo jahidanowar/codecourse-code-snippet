@@ -12,7 +12,12 @@
           />
           <div class="text-gray-600">
             Created by
-            <nuxt-link :to="{ name: 'index' }">{{
+            <nuxt-link :to="{
+              name: 'author-id',
+              params: {
+                id: snippet.author.data.username,
+              },
+            }">{{
               snippet.author.data.name
             }}</nuxt-link>
           </div>
@@ -34,11 +39,12 @@
         />
       </div>
       <div class="flex flex-wrap lg:flex-no-wrap">
-        <div
-          class="w-full lg:w-2/3 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8"
-        >
+        <div class="w-full lg:w-2/3 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8">
           <div class="flex flex-row lg:flex-col mr-2 order-first">
-            <StepNavigationButton :step="previousStep" title="Previous Step">
+            <StepNavigationButton
+              :step="previousStep"
+              title="Previous Step"
+            >
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -46,9 +52,7 @@
                 width="24"
                 height="24"
               >
-                <path
-                  d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z"
-                />
+                <path d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z" />
               </svg>
             </StepNavigationButton>
             <AddStepButton
@@ -60,13 +64,17 @@
           </div>
 
           <div class="w-full lg:mr-2">
-            <StepEditor :step="currentStep" v-model="currentStep.body" />
+            <StepEditor
+              :step="currentStep"
+              v-model="currentStep.body"
+            />
           </div>
 
-          <div
-            class="flex flex-row-reverse lg:flex-col order-first lg:order-last"
-          >
-            <StepNavigationButton :step="nextStep" title="Next Step">
+          <div class="flex flex-row-reverse lg:flex-col order-first lg:order-last">
+            <StepNavigationButton
+              :step="nextStep"
+              title="Next Step"
+            >
               <svg
                 class="fill-current text-white h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,9 +82,7 @@
                 width="24"
                 height="24"
               >
-                <path
-                  d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
-                />
+                <path d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z" />
               </svg>
             </StepNavigationButton>
             <AddStepButton
@@ -96,7 +102,10 @@
         <div class="w-full lg:w-1/3">
           <div class="mb-8">
             <h3 class="text-xl text-gray-600 font-medium mb-6">Steps</h3>
-            <StepList :steps="orderedStepsAsc" :currentStep="currentStep" />
+            <StepList
+              :steps="orderedStepsAsc"
+              :currentStep="currentStep"
+            />
           </div>
 
           <div class="border-t-2 border-gray-300 pt-6 pb-2">
@@ -119,7 +128,10 @@
                 class="mr-2"
               />
               <div>
-                <label for="public" class="text-gray-600 font-medium">
+                <label
+                  for="public"
+                  class="text-gray-600 font-medium"
+                >
                   Make this snippet public
                 </label>
                 <p class="text-gray-500 text-sm">
@@ -169,12 +181,12 @@ export default {
     AddStepButton,
     DeleteStepButton,
   },
-  head() {
+  head () {
     return {
       title: `Editing ${this.snippet.title || "Untitled snippet"}`,
     };
   },
-  data() {
+  data () {
     return {
       snippet: null,
       steps: [],
@@ -216,19 +228,19 @@ export default {
     },
   },
   computed: {
-    lastSavedFormatted() {
+    lastSavedFormatted () {
       return moment(this.lastSaved).format("hh:mm:ss");
     },
   },
   methods: {
-    touchLastSaved() {
+    touchLastSaved () {
       this.lastSaved = moment.now();
     },
-    handleStepAdded(step) {
+    handleStepAdded (step) {
       this.steps.push(step);
       this.goToStep(step);
     },
-    handleStepDeleted(step) {
+    handleStepDeleted (step) {
       const previousStep = this.previousStep;
 
       this.steps = this.steps.filter((s) => {
@@ -238,7 +250,7 @@ export default {
       this.goToStep(previousStep || this.firstStep);
     },
   },
-  async asyncData({ app, params }) {
+  async asyncData ({ app, params }) {
     let snippet = await app.$axios.$get(`snippets/${params.id}`);
 
     return {

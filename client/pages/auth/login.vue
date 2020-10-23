@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-16">
     <div class="flex flex-col items-center">
-      <h1 class="text-3xl text-gray-700 font-medium mb-10">Hello</h1>
+      <h1 class="text-3xl text-gray-700 font-medium mb-10">Hello.</h1>
 
       <form
         @submit.prevent="submit"
@@ -13,8 +13,7 @@
             for="email"
             class="block text-gray-600 font-medium mb-2"
             :class="{ 'text-red-500': validation.email }"
-            >Email Address</label
-          >
+          >Email Address</label>
           <input
             v-model="form.email"
             type="text"
@@ -36,8 +35,7 @@
             for="password"
             class="block text-gray-600 font-medium mb-2"
             :class="{ 'text-red-500': validation.password }"
-            >Password</label
-          >
+          >Password</label>
           <input
             v-model="form.password"
             type="password"
@@ -67,19 +65,19 @@
       <div class="text-center text-gray-600">
         No account?
 
-        <nuxt-link :to="{ name: 'index' }">Create one here</nuxt-link>
+        <nuxt-link :to="{ name: 'auth-signup' }">Create one here</nuxt-link>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  head() {
+  head () {
     return {
       title: "Login",
     };
   },
-  data() {
+  data () {
     return {
       form: {
         email: "",
@@ -89,7 +87,7 @@ export default {
     };
   },
   methods: {
-    async submit() {
+    async submit () {
       try {
         await this.$auth.loginWith("local", {
           data: this.form,

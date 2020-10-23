@@ -6,14 +6,17 @@
       </h1>
 
       <div class="w-full md:w-1/2 lg:w-1/3 mb-10">
-        <form @submit.prevent="submit" action="#" class="mb-6">
+        <form
+          @submit.prevent="submit"
+          action="#"
+          class="mb-6"
+        >
           <div class="mb-6">
             <label
               for="email"
               class="block text-gray-600 font-medium mb-2"
               :class="{ 'text-red-500': validation.email }"
-              >Email Address</label
-            >
+            >Email Address</label>
             <input
               v-model="form.email"
               type="text"
@@ -35,8 +38,7 @@
               for="name"
               class="block text-gray-600 font-medium mb-2"
               :class="{ 'text-red-500': validation.name }"
-              >Name</label
-            >
+            >Name</label>
             <input
               v-model="form.name"
               type="text"
@@ -58,8 +60,7 @@
               for="username"
               class="block text-gray-600 font-medium mb-2"
               :class="{ 'text-red-500': validation.username }"
-              >Username</label
-            >
+            >Username</label>
             <input
               v-model="form.username"
               type="text"
@@ -81,8 +82,7 @@
               for="password"
               class="block text-gray-600 font-medium mb-2"
               :class="{ 'text-red-500': validation.password }"
-              >Password</label
-            >
+            >Password</label>
             <input
               v-model="form.password"
               type="password"
@@ -114,15 +114,12 @@
         </form>
 
         <div>
-          <nuxt-link
-            :to="{
+          <nuxt-link :to="{
               name: 'author-id',
               params: {
                 id: $auth.user.username
               }
-            }"
-            >View your public profile link</nuxt-link
-          >
+            }">View your public profile link</nuxt-link>
         </div>
       </div>
     </div>
@@ -131,12 +128,12 @@
 <script>
 export default {
   middleware: ["auth"],
-  head() {
+  head () {
     return {
       title: "Account"
     };
   },
-  data() {
+  data () {
     return {
       form: {
         email: this.$auth.user.email,
@@ -148,13 +145,16 @@ export default {
     };
   },
   methods: {
-    async submit() {
+    async submit () {
       try {
         await this.$axios.$patch(
           `users/${this.$auth.user.username}`,
           this.form
         );
         await this.$auth.fetchUser();
+
+        this.form.password = ''
+        this.validation = {}
       } catch (e) {
         if (e.response.status === 422) {
           this.validation = e.response.data.errors;
