@@ -16,10 +16,11 @@
             placeholder="Search snippets"
             :class-names="{
               'ais-SearchBox': 'w-full',
-              'ais-SearchBox-input': 'w-full border-2 border-gray-400 rounded-lg block p-4 text-lg focus:outline-none focus:border-blue-500',
+              'ais-SearchBox-input':
+                'w-full border-2 border-gray-400 rounded-lg block p-4 text-lg focus:outline-none focus:border-blue-500',
               'ais-SearchBox-submit': 'hidden',
               'ais-SearchBox-submitIcon': 'hidden',
-              'ais-SearchBox-reset': 'hidden'
+              'ais-SearchBox-reset': 'hidden',
             }"
           />
         </div>
@@ -27,19 +28,18 @@
 
       <div class="container pb-16">
         <AisStateResults>
-          <div slot-scope="{query}">
+          <div slot-scope="{ query }">
             <template v-if="query.length">
               <AisStats>
                 <h1
                   class="text-xl text-gray-600 font-medium mb-6"
                   slot-scope="{ nbHits }"
-                >Snippets ({{ nbHits }})</h1>
+                >
+                  Snippets ({{ nbHits }})
+                </h1>
               </AisStats>
               <AisHits>
-                <div
-                  slot="item"
-                  slot-scope="{item}"
-                >
+                <div slot="item" slot-scope="{ item }">
                   <SearchSnippetCard :snippet="item.data" />
                 </div>
               </AisHits>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import SearchSnippetCard from "./components/SearchSnippetCard"
+import SearchSnippetCard from "./components/SearchSnippetCard";
 import {
   AisInstantSearchSsr,
   AisStateResults,
@@ -70,25 +70,25 @@ const searchClient = algoliasearch(
   process.env.ALGOLIA_SECRET
 );
 
-function nuxtRouter (vueRouter) {
+function nuxtRouter(vueRouter) {
   return {
-    read () {
+    read() {
       return vueRouter.currentRoute.query;
     },
-    write (routeState) {
+    write(routeState) {
       vueRouter.push({
         query: routeState,
       });
     },
-    createURL (routeState) {
+    createURL(routeState) {
       return vueRouter.resolve({
         query: routeState,
       }).href;
     },
-    onUpdate (cb) {
-      if (typeof window === 'undefined') return;
+    onUpdate(cb) {
+      if (typeof window === "undefined") return;
 
-      this._onPopState = event => {
+      this._onPopState = (event) => {
         const routeState = event.state;
         // On initial load, the state is read from the URL without
         // update. Therefore, the state object isn't present. In this
@@ -99,12 +99,12 @@ function nuxtRouter (vueRouter) {
           cb(routeState);
         }
       };
-      window.addEventListener('popstate', this._onPopState);
+      window.addEventListener("popstate", this._onPopState);
     },
-    dispose () {
-      if (typeof window === 'undefined') return;
+    dispose() {
+      if (typeof window === "undefined") return;
 
-      window.removeEventListener('popstate', this._onPopState);
+      window.removeEventListener("popstate", this._onPopState);
     },
   };
 }
@@ -120,40 +120,48 @@ export default {
     AisPagination,
     AisPoweredBy,
   },
-  head () {
+  head() {
     return {
       title: "Search",
     };
   },
-  data () {
+  data() {
     // Create it in `data` to access the Vue Router
     const mixin = createServerRootMixin({
       searchClient,
-      indexName: 'snippets',
+      indexName: "snippets",
       routing: {
         router: nuxtRouter(this.$nuxt.$router),
       },
     });
     return {
       ...mixin.data(),
+      key: null,
     };
   },
-  provide () {
+  provide() {
     return {
       // Provide the InstantSearch instance for SSR
       $_ais_ssrInstantSearchInstance: this.instantsearch,
     };
   },
-  serverPrefetch () {
-    return this.instantsearch.findResultsState(this).then(algoliaState => {
+  serverPrefetch() {
+    return this.instantsearch.findResultsState(this).then((algoliaState) => {
       this.$ssrContext.nuxt.algoliaState = algoliaState;
     });
   },
-  beforeMount () {
+  beforeMount() {
     const results =
       this.$nuxt.context.nuxtState.algoliaState || window.__NUXT__.algoliaState;
 
     this.instantsearch.hydrate(results);
+  },
+  async asyncData({ app }) {
+    let keys = await app.$axios.$get("keys/algolia");
+
+    return {
+      key: keys.data,
+    };
   },
 };
 </script>

@@ -25,6 +25,7 @@
 import DashboardSnippetCard from "./components/DashboardSnippetCard";
 
 export default {
+  middleware: ["auth"],
   components: {
     DashboardSnippetCard,
   },
