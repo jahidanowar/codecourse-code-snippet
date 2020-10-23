@@ -23,6 +23,11 @@ Route::group(['prefix' => 'me', 'namespace' => 'App\Http\Controllers\Me'], funct
     Route::get('snippets', 'SnippetController@index');
 });
 
+Route::group(['prefix' => 'users/{user}', 'namespace' => 'App\Http\Controllers\Users'], function () {
+    Route::get('', 'UserController@show');
+    Route::get('snippets', 'SnippetController@index');
+});
+
 Route::group(['prefix' => 'keys', 'namespace' => 'App\Http\Controllers\Keys'], function () {
     Route::get('algolia', 'AlgoliaKeyController');
 });

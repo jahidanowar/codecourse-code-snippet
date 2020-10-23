@@ -16,13 +16,15 @@ class UserSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => "Kenneth Fernandez",
             'email' => "kenneth@gmail.com",
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'username' => 'kenneth'
         ]);
 
         \App\Models\User::factory()->create([
             'name' => "Rodzainna Hamisain",
             'email' => "rodzainna@gmail.com",
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'username' => 'rodzainna'
         ]);
     }
 }
