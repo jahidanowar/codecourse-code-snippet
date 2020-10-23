@@ -2,18 +2,22 @@
   <SnippetCard :snippet="snippet">
     <ul class="flex items-end text-gray-600">
       <li class="mr-6">
-        <nuxt-link
-          :to="{
+        <template v-if="snippet.is_public">Public</template>
+        <template v-else>Private</template>
+      </li>
+      <li class="mr-6">
+        <nuxt-link :to="{
             name: 'snippets-id-edit',
             params: {
               id: snippet.uuid,
             },
-          }"
-          >Edit</nuxt-link
-        >
+          }">Edit</nuxt-link>
       </li>
       <li class="mr-6">
-        <button class="text-blue-500" @click.prevent="deleteSnippet()">
+        <button
+          class="text-blue-500"
+          @click.prevent="deleteSnippet()"
+        >
           Delete
         </button>
       </li>
@@ -31,7 +35,7 @@ export default {
     },
   },
   methods: {
-    async deleteSnippet() {
+    async deleteSnippet () {
       if (!window.confirm("Are you sure you want to delete this snippet?")) {
         return;
       }
