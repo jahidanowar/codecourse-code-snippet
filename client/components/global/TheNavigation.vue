@@ -13,13 +13,13 @@
         <span
           class="bg-blue-500 h-1 w-8 rounded mb-1"
           :class="{
-            'transition-all duration-200 transform rotate-45 absolute right-0': mobileNavOpen,
+            'transition-all duration-200 transform rotate-45 absolute right-0': mobileNavOpen
           }"
         ></span>
         <span
           class="bg-blue-500 h-1 w-8 rounded mb-1"
           :class="{
-            'transition-all duration-200 transform -rotate-45 absolute right-0': mobileNavOpen,
+            'transition-all duration-200 transform -rotate-45 absolute right-0': mobileNavOpen
           }"
         ></span>
         <span
@@ -64,13 +64,12 @@
               </nuxt-link>
             </li>
             <li>
-              <a
-                href="#"
-                @click.prevent="signOut"
+              <nuxt-link
+                :to="{ name: 'account' }"
                 class="text-lg text-gray-700 lg:py-8 lg:px-4"
               >
                 {{ $auth.user.name }}
-              </a>
+              </nuxt-link>
             </li>
             <li>
               <a
@@ -109,14 +108,14 @@
 export default {
   data() {
     return {
-      mobileNavOpen: false,
+      mobileNavOpen: false
     };
   },
   methods: {
     async signOut() {
       console.log("signout");
       await this.$auth.logout();
-    },
-  },
+    }
+  }
 };
 </script>

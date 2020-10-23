@@ -11,6 +11,6 @@ class UserPolicy
 
     public function as(User $authenticatedUser, User $user)
     {
-        return $authenticatedUser->id === $user->user_id;
+        return $authenticatedUser->id === $user->id;
     }
 }
