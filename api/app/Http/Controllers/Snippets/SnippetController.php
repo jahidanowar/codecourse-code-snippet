@@ -18,7 +18,7 @@ class SnippetController extends Controller
     public function index(Request $request){
         return fractal()
             ->collection(
-                Snippet::take($request->get('limit', 10))->latest()->public()->get()
+                Snippet::take($request->get('limit', 20))->latest()->public()->get()
             )
             ->parseIncludes(['author'])
             ->transformWith(new SnippetTransformer())
